@@ -141,9 +141,6 @@ if(isset($_GET['ID'])){
 	<?php
 }
 ?>
-<script type="text/javascript" src="jquery-3.6.1.min"></script>
-<script type="text/javascript" src="script.js"></script>
-
 </body>
 
 </html>
