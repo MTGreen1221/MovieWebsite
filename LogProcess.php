@@ -21,7 +21,7 @@ if(!$test){
 	header ('Location:LogIn.php?error=1');
 	exit ();	
 }
-if($test['SecondsSinceLogIn'] < 90){
+if($test['SecondsSinceLogIn'] < 90 && $test['LastLogIn'] != NULL){
 	header ('Location:LogIn.php?error=3');
 	exit ();
 }

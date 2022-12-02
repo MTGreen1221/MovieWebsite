@@ -18,7 +18,7 @@ if(isset($_GET["error"])){
 	if($_GET["error"]==1){
 		echo "only admins can do that action";
 	}
-	}
+}
 ?>
 <br>
 <h1>Recent additions</h1>
@@ -96,18 +96,21 @@ if(count($friends) > 0){
 			$stmt->bindParam (':ID', $value[3]);
 			$stmt->execute();
 			$title = $stmt->fetch(PDO::FETCH_ASSOC);
-			echo $title['Name'];
+			$webtitle = "Movie.php?ID=".$title['MovieID'];
+			?><a href=<?php echo $webtitle?>><?php echo $title['Name']?></a><?php
 			?><br><?php
 			$sql = 'SELECT * FROM Users WHERE UserID = :ID';
 			$stmt = $pdo->prepare ($sql);
 			$stmt->bindParam (':ID', $value[0]);
 			$stmt->execute();
 			$name = $stmt->fetch(PDO::FETCH_ASSOC);
-			echo $name['Username'];
+			$n = $name['Username'];
+			$website = "User.php?ID=".$name['UserID'];
+			?><a href=<?php echo $website ?>><?php echo $n ?></a><?php
 			echo ": ".$value[1];
 			?><br><?php
 			echo " comment added: ".$value[2];
-			?><br><br><?php 
+			?><br><br><?php  
 		}
 	}
 	else{
@@ -118,14 +121,17 @@ if(count($friends) > 0){
 			$stmt->bindParam (':ID', $value[3]);
 			$stmt->execute();
 			$title = $stmt->fetch(PDO::FETCH_ASSOC);
-			echo $title['Name'];
+			$webtitle = "Movie.php?ID=".$title['MovieID'];
+			?><a href=<?php echo $webtitle?>><?php echo $title['Name']?></a><?php
 			?><br><?php
 			$sql = 'SELECT * FROM Users WHERE UserID = :ID';
 			$stmt = $pdo->prepare ($sql);
 			$stmt->bindParam (':ID', $value[0]);
 			$stmt->execute();
 			$name = $stmt->fetch(PDO::FETCH_ASSOC);
-			echo $name['Username'];
+			$n = $name['Username'];
+			$website = "User.php?ID=".$name['UserID'];
+			?><a href=<?php echo $website ?>><?php echo $n ?></a><?php
 			echo ": ".$value[1];
 			?><br><?php
 			echo " comment added: ".$value[2];
@@ -142,8 +148,9 @@ for($i = 0; $i <= sizeof($pending)-1; $i++){
 	$stmt->bindParam (':ID', $pending[$i]);
 	$stmt->execute();
 	$name = $stmt->fetch(PDO::FETCH_ASSOC);
-	?>
-	<p id = <?php echo $name['Username']?>><?php echo $name['Username'].':'; ?>
+	$n = $name['Username'];
+	$website = "User.php?ID=".$n;
+	?><a href=<?php echo $website ?>><?php echo $n ?>: </a>
 	<form action="accept.php" method="POST">
 	<input type="hidden" name="ID" value="<?php echo $name['UserID']?>">
 	<input type="submit" value="accept">
@@ -152,7 +159,6 @@ for($i = 0; $i <= sizeof($pending)-1; $i++){
 	<input type="hidden" name="ID" value="<?php echo $name['UserID']?>">
 	<input type="submit" value="deny">
 	</form>
-	<!--<button class = accept>accept</button><button class = deny>deny</button><br></p>-->
 	<?php
 }
 

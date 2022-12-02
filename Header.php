@@ -16,6 +16,8 @@ if(isset($_SESSION['ID'])){
 	$stmt->bindParam (':UserID', $_SESSION['ID']);
 	$stmt->execute();
 	$test = $stmt->fetch(PDO::FETCH_ASSOC);
+	$Userpage = "User.php?ID=".$test['UserID'];
+	?><a href=<?php echo $Userpage ?>> <?php echo $test['Username'] ?> </a><?php
 	if($test['IsAdmin']){
 		?><a href="Admin.php"> Add movie </a><?php
 	}

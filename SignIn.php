@@ -4,7 +4,7 @@
 <?php
 require ('Header.php');
 ?>
-<form action="SignProcess.php" method="POST">
+<form action="SignProcess.php" enctype="multipart/form-data" method="POST">
 Email: <input type="text" name="Email"><br>
 Username: <input type="text" name="Username"><br>
 Password: <input type="text" name="Password"><br>
