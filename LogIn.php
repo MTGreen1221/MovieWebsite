@@ -8,7 +8,7 @@ require ('Header.php');
 <form action="SignIn.php" method="POST">
 <input type="submit" value="Sign up">
 </form>
-<form action="LogProcess.php" method="POST">
+<form id="login" action="LogProcess.php" method="POST">
 <input type="hidden" name="hiddenvalue" value="foo">
 Username: <input type="text" name="Username"><br>
 Password: <input type="text" name="Password"><br>
@@ -25,6 +25,9 @@ if(isset($_GET["error"])){
 	}
 	if($_GET["error"]==2){
 		echo "Incorrect password";
+	}
+	if($_GET["error"]==3){
+		echo "You are timed out";
 	}
 }
 ?>

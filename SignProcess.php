@@ -34,12 +34,35 @@ if($test){
 	header ('Location:SignIn.php?error=2');
 	exit ();
 }
+if ($_FILES['upload']['error'] > 0){
+	header ('Location:Admin.php?error=4');
+	exit ();
+}
+$FileName = $_FILES['upload']['name'];
+$finfo = new finfo (FILEINFO_MIME_TYPE);
+$ftype = $finfo->file ($_FILES['upload']['tmp_name']);
+if (strcmp($ftype, "image/jpg") != 0 && strcmp($ftype, "image/jpeg") != 0 && strcmp($ftype, "image/png") != 0){
+	header ('Location:Admin.php?error=5');
+	exit ();
+}
+if ($ftype == "image/jpeg"){
+	$newName = $_POST['Email'].$_POST['Username'].".jpeg";
+}
+if ($ftype == "image/jpg"){
+	$newName = $_POST['Email'].$_POST['Username'].".jpg";
+}
+if ($ftype == "image/png"){
+	$newName = $_POST['Email'].$_POST['Username'].".png";
+}
+$FILE_DIR = "C:\UniServerZ\www\\test\pictures\\";
+move_uploaded_file ($_FILES['upload']['tmp_name'], $FILE_DIR.$newName);
 $encryptedPass = password_hash($_POST['Password'],PASSWORD_BCRYPT);
-$sql = 'INSERT INTO Users (Email, Username, Password) VALUES (:Email, :Username, :Password)';
+$sql = 'INSERT INTO Users (Email, Username, Password, ProfilePicture) VALUES (:Email, :Username, :Password, :ProfilePicture)';
 $stmt = $pdo->prepare ($sql);
 $stmt->bindParam (':Email', $_POST['Email']);
 $stmt->bindParam (':Username', $_POST['Username']);
 $stmt->bindParam (':Password', $encryptedPass);
+$stmt->bindParam (':ProfilePicture', $newName);
 $stmt->execute();
 header ('Location:LogIn.php');
 exit ();

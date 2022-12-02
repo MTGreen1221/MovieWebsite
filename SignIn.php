@@ -5,11 +5,11 @@
 require ('Header.php');
 ?>
 <form action="SignProcess.php" method="POST">
-<input type="hidden" name="hiddenvalue" value="foo">
 Email: <input type="text" name="Email"><br>
 Username: <input type="text" name="Username"><br>
 Password: <input type="text" name="Password"><br>
 Confirm Password: <input type="text" name="Password2"><br>
+Profile Picture: <input type="file" name="upload" accept=".jpg, .png"><br>
 <input type="submit" value="Submit">
 </form>
 <?php
@@ -25,6 +25,9 @@ if(isset($_GET["error"])){
 	}
 	if($_GET["error"]==3){
 		echo "Passwords do not match";
+	}
+	if($_GET["error"]==4){
+		echo "Please provide a profilr picture";
 	}
 }
 ?>
