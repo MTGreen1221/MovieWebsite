@@ -149,7 +149,7 @@ for($i = 0; $i <= sizeof($pending)-1; $i++){
 	$stmt->execute();
 	$name = $stmt->fetch(PDO::FETCH_ASSOC);
 	$n = $name['Username'];
-	$website = "User.php?ID=".$n;
+	$website = "User.php?ID=".$name['UserID'];
 	?><a href=<?php echo $website ?>><?php echo $n ?>: </a>
 	<form action="accept.php" method="POST">
 	<input type="hidden" name="ID" value="<?php echo $name['UserID']?>">

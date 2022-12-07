@@ -21,7 +21,9 @@ if(isset($_SESSION['ID'])){
 	if($test['IsAdmin']){
 		?><a href="Admin.php"> Add movie </a><?php
 	}
-	?><a href="LogOut.php">Log out</a><?php
+	?>
+	<a href="Recomend.php"> Recomended </a>
+	<a href="LogOut.php">Log out</a><?php
 }
 else{
 	?><a href="LogIn.php">Log in</a><?php
